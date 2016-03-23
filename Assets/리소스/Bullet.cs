@@ -3,11 +3,11 @@ using System.Collections;
 
 public class Bullet : MonoBehaviour {
 
-    public GameObject EnemyLaser;
+
     bool Hit = false;//총알을 맞았는지
     PlayerCtrl pc = null;//PlayerCtrl스크립트를 담아줌 변수
     BoxCollider2D bc = null;//BoxCollider2D를 넣어줄 변수
-    float oneShoting = 30f;
+    float oneShoting = 10f;
     float speed = 1f;
 
     float i = 0;
@@ -34,19 +34,12 @@ public class Bullet : MonoBehaviour {
 
     void Update()
     {
-        speed += Time.deltaTime;
-        i += Time.deltaTime;
-        if (i < oneShoting)
-        {
-            //GetComponent<Rigidbody2D>().AddForce(new Vector2(speed * Mathf.Cos(Mathf.PI * 2 * i / oneShoting), speed * Mathf.Sin(Mathf.PI * i * 2 / oneShoting)));
-            //transform.Rotate(new Vector3(0f, 0f, 360 * i / oneShoting - 90));
-            // i = 0;
+       
+        
 
 
 
-        }
-
-        if (transform.position.y <= -7f)//만약 스케일x값이 0보다 작다면
+        if (transform.position.y <= -7f)//만약 포지션 x값이 0보다 작다면
         {
             Destroy(this.gameObject);//자기 자신 삭제
         }
