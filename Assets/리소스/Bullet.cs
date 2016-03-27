@@ -10,6 +10,8 @@ public class Bullet : MonoBehaviour {
     float oneShoting = 10f;
     float speed = 1f;
 
+    public int Bullet_Kind;
+
     float i = 0;
     public float BulletSpeed = 4f;
     Time StartTime = null;
@@ -34,11 +36,6 @@ public class Bullet : MonoBehaviour {
 
     void Update()
     {
-       
-        
-
-
-
         if (transform.position.y <= -7f)//만약 포지션 x값이 0보다 작다면
         {
             Destroy(this.gameObject);//자기 자신 삭제

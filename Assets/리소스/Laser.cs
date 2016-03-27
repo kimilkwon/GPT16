@@ -20,8 +20,8 @@ public class Laser : MonoBehaviour
         if (coll.gameObject.tag == "ENEMY")
         {
          
-            EM.Hp -= 1;// Hp를 하나 깎음 
-            EM.Hit();
+            EM.Enemy_Hp -= 1;// Hp를 하나 깎음 
+            EM.Enemy_Hit();
         }
     }
     void Start()
