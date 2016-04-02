@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour
     }
 
 
-    public IEnumerator Pattern_One()
+    public IEnumerator Pattern_One(float Enemy_oneShoting)
     {
     do
         {
@@ -32,11 +32,31 @@ public class Enemy : MonoBehaviour
                 GameObject obj;
                 obj = (GameObject)Instantiate(Enemy_Bullet, this.transform.position, Quaternion.identity);
                 //보스의 위치에 bullet을 생성합니다.
-                obj.GetComponent<Rigidbody2D>().AddForce(new Vector2(Enemy_Speed * Mathf.Sin(Mathf.PI * 2 * i / Enemy_oneShoting), Enemy_Speed * Mathf.Cos(Mathf.PI * i * 2 / Enemy_oneShoting)));
+                obj.GetComponent<Rigidbody2D>().AddForce(new Vector2(Enemy_Speed * Mathf.Cos(Mathf.PI * 2 * i / Enemy_oneShoting), Enemy_Speed * Mathf.Sin(Mathf.PI * i * 2 / Enemy_oneShoting)));
                 obj.transform.Rotate(new Vector3(0f, 0f, 360 * i / Enemy_oneShoting - 90));
             }
 
             //지정해둔 각도의 방향으로 모든 총탄을 날리고, 날아가는 방향으로 방향회전을 해줍니다.
+
+            yield return new WaitForSeconds(1.5f);
+        } while (true);
+    }
+    public IEnumerator Pattern_Two(float Enemy_oneShoting)
+    {
+        
+        do
+        {
+            for (int i = 0; i < Enemy_oneShoting; i++)
+            {
+                GameObject obj;
+                obj = (GameObject)Instantiate(Enemy_Bullet, this.transform.position, Quaternion.identity);
+                //보스의 위치에 bullet을 생성합니다.
+                obj.GetComponent<Rigidbody2D>().AddForce(new Vector2(Enemy_Speed * Mathf.Cos(Mathf.PI * 2 * i / Enemy_oneShoting), Enemy_Speed * Mathf.Sin(Mathf.PI * i * 2 / Enemy_oneShoting)));
+                obj.transform.Rotate(new Vector3(0f, 0f, 180 * i / Enemy_oneShoting - 90));
+                obj.GetComponent<Rigidbody2D>().gravityScale = 0.2f;
+            }
+
+           
 
             yield return new WaitForSeconds(1.5f);
         } while (true);

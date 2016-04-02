@@ -22,6 +22,7 @@ public class Laser : MonoBehaviour
          
             EM.Enemy_Hp -= 1;// Hp를 하나 깎음 
             EM.Enemy_Hit();
+            Destroy(this.gameObject);
         }
     }
     void Start()

@@ -7,8 +7,7 @@ public class Bullet : MonoBehaviour {
     bool Hit = false;//총알을 맞았는지
     PlayerCtrl pc = null;//PlayerCtrl스크립트를 담아줌 변수
     BoxCollider2D bc = null;//BoxCollider2D를 넣어줄 변수
-    float oneShoting = 10f;
-    float speed = 1f;
+    public GameObject Boom = null;
 
     public int Bullet_Kind;
 
@@ -28,6 +27,10 @@ public class Bullet : MonoBehaviour {
             Hit = true;//총알을 맞음
             pc.hp -= 1;//주인공의 Hp를 하나 깎음 
             pc.PlayerHit();
+
+            // Instantiate(Boom, this.transform.position, Quaternion.identity);
+
+              Destroy(this.gameObject);
         }
     }
     void Start()
@@ -36,9 +39,31 @@ public class Bullet : MonoBehaviour {
 
     void Update()
     {
-        if (transform.position.y <= -7f)//만약 포지션 x값이 0보다 작다면
+        // DeletObjectF();
+        Destroy(this.gameObject,4f);
+
+    }
+
+
+
+
+    void DeletObjectF()
+    {
+        if (transform.position.y <= -7f)
         {
-            Destroy(this.gameObject);//자기 자신 삭제
+            Destroy(this.gameObject);
+        }
+        if (transform.position.y >= 6f)
+        {
+            Destroy(this.gameObject);
+        }
+        if (transform.position.x <= -3f)
+        {
+            Destroy(this.gameObject);
+        }
+        if (transform.position.x >= 3f)
+        {
+            Destroy(this.gameObject);
         }
     }
 }

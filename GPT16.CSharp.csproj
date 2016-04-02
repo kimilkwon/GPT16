@@ -70,6 +70,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\리소스\Bullet.cs" />
+    <Compile Include="Assets\리소스\Center.cs" />
+    <Compile Include="Assets\리소스\Ctrl.cs" />
     <Compile Include="Assets\리소스\Enemy.cs" />
     <Compile Include="Assets\리소스\Enemy_One.cs" />
     <Compile Include="Assets\리소스\Laser.cs" />
