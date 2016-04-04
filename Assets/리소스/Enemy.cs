@@ -12,7 +12,13 @@ public class Enemy : MonoBehaviour
 
 
     bool Enemy_Die = false;//죽었는지 안죽었는지
+    public Sprite EnemyRed;
+    public Sprite EnemyNormal;
+    bool Hit = false;
+    float deltaTime = 0.0f;
+    public float EnemyChangeTime = 0.2f;
 
+    public SpriteRenderer spriteRenderer;
 
     public void Enemy_Hit()
     {
@@ -20,11 +26,13 @@ public class Enemy : MonoBehaviour
         {
             Enemy_Die = true;//Die는 참
         }
+        Enemy_Change(true);
     }
 
 
     public IEnumerator Pattern_One(float Enemy_oneShoting)
     {
+        
     do
         {
             for (int i = 0; i < Enemy_oneShoting; i++)
@@ -39,7 +47,7 @@ public class Enemy : MonoBehaviour
             //지정해둔 각도의 방향으로 모든 총탄을 날리고, 날아가는 방향으로 방향회전을 해줍니다.
 
             yield return new WaitForSeconds(1.5f);
-        } while (true);
+        } while ( true);
     }
     public IEnumerator Pattern_Two(float Enemy_oneShoting)
     {
@@ -59,13 +67,33 @@ public class Enemy : MonoBehaviour
            
 
             yield return new WaitForSeconds(1.5f);
-        } while (true);
+        } while ( true);
     }
 
-
-
-    public void Enemy_Die_Check()
+    void Enemy_Change(bool fHit)
     {
+        Hit = fHit;
+        if (fHit)
+        {
+            spriteRenderer.color = Color.red;
+
+        }
+    }
+ 
+
+
+    public void Enemy_Die_Check(string SCENE)
+    {
+
+        if (Hit)
+        {
+            deltaTime += Time.deltaTime;
+            if (deltaTime > EnemyChangeTime)
+            {
+                deltaTime = 0.0f;
+                spriteRenderer.color = Color.white;
+            }
+        }
         if (Enemy_Die == true)//총알을 맞았다면
         {
             transform.localScale = new Vector2(transform.localScale.x - 0.01f, transform.localScale.y - 0.01f);//스케일은 작아짐
@@ -81,6 +109,7 @@ public class Enemy : MonoBehaviour
             foreach (GameObject ob in obj)
             {
                 Destroy(ob);
+                Application.LoadLevel(SCENE);
             }
 
         }
@@ -95,6 +124,7 @@ public class Enemy : MonoBehaviour
             }
 
         }
+      
 
 
     }

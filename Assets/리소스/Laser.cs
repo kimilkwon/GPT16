@@ -5,15 +5,15 @@ public class Laser : MonoBehaviour
 {
     float LaserSpeed = 12f;
  
-    Enemy EM = null;//PlayerCtrl스크립트를 담아줌 변수
-    BoxCollider2D bc = null;//BoxCollider2D를 넣어줄 변수
-    // Use this for initialization
-   
+    Enemy EM = null;
+    BoxCollider2D bc = null;
+    private ScoreCtrl SC = null;
+
     void Awake()
     {
         bc = GetComponent<BoxCollider2D>();//BoxCollider2D를 넣어줌
-        EM = GameObject.FindWithTag("ENEMY").GetComponent<Enemy>();
-        
+        EM = GameObject.FindWithTag("ENEMY").GetComponent<Enemy>(); 
+        SC = GameObject.Find("Center").GetComponent<ScoreCtrl>();
     }
     void OnTriggerEnter2D(Collider2D coll)//충돌 체크 함수
     {
@@ -24,6 +24,16 @@ public class Laser : MonoBehaviour
             EM.Enemy_Hit();
             Destroy(this.gameObject);
         }
+
+        if (coll.gameObject.tag == "BULLETS")
+        {
+             
+            Destroy(this.gameObject);
+            SC.ScoreUp(10);
+           
+        }
+
+
     }
     void Start()
     {

@@ -7,8 +7,6 @@ public class PlayerCtrl : MonoBehaviour {
     public GameObject laser = null;
     public int hp = 5;//플레이어 Hp
     bool Die = false;//죽었는지 안죽었는지
-    public Sprite PlayerRed;
-    public Sprite PlayerNormal;
     bool Hit = false;
     float deltaTime = 0.0f;
     public float PlayeChangeTime = 0.2f;
@@ -23,7 +21,7 @@ public class PlayerCtrl : MonoBehaviour {
             Die = true;//Die는 참
         }
 
-        PlayerChange(false);
+        PlayerChange(true);
       
     }
 public void Awake()
@@ -34,9 +32,9 @@ public void Awake()
     void PlayerChange(bool fHit)
     {
         Hit = fHit;
-        if (!fHit)
+        if (fHit)
         {
-            spriteRenderer.sprite = PlayerRed;
+            spriteRenderer.color = Color.red;
 
         }
     }
@@ -48,13 +46,13 @@ public void Awake()
 
     void Update()
     {
-        if (!Hit)
+        if (Hit)
         {
             deltaTime += Time.deltaTime;
             if(deltaTime>PlayeChangeTime)
             {
                 deltaTime = 0.0f;
-                spriteRenderer.sprite = PlayerNormal;
+                spriteRenderer.color = Color.white;
             }
         }
         
