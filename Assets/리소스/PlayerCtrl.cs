@@ -7,12 +7,9 @@ public class PlayerCtrl : MonoBehaviour {
     public GameObject laser = null;
     public int hp = 5;//플레이어 Hp
     bool Die = false;//죽었는지 안죽었는지
-    bool Hit = false;
-    float deltaTime = 0.0f;
-    public float PlayeChangeTime = 0.2f;
+  
 
-    public SpriteRenderer spriteRenderer;
-
+  
 
     public void PlayerHit()//EnemyCtrl스크립트에서 충돌시 불러줄꺼임
     {
@@ -21,41 +18,36 @@ public class PlayerCtrl : MonoBehaviour {
             Die = true;//Die는 참
         }
 
-        PlayerChange(true);
-      
+        StartCoroutine(PlayerChange());
+
     }
 public void Awake()
     {
         //spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    void PlayerChange(bool fHit)
+ 
+    private IEnumerator PlayerChange()
     {
-        Hit = fHit;
-        if (fHit)
-        {
-            spriteRenderer.color = Color.red;
+        SpriteRenderer sprite = GetComponentInChildren<SpriteRenderer>();
 
-        }
+        sprite.color = Color.red;
+
+        yield return new WaitForSeconds(0.1f);
+
+        sprite.color = Color.white;
+
+        yield return null;
+
     }
 
 
 
 
-    
 
     void Update()
     {
-        if (Hit)
-        {
-            deltaTime += Time.deltaTime;
-            if(deltaTime>PlayeChangeTime)
-            {
-                deltaTime = 0.0f;
-                spriteRenderer.color = Color.white;
-            }
-        }
-        
+     
 
         if (Die == true)//Die가 참이라면
         {
