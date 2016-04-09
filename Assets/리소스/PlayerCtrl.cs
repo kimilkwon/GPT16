@@ -7,7 +7,7 @@ public class PlayerCtrl : MonoBehaviour {
     public GameObject laser = null;
     public int hp = 5;//플레이어 Hp
     bool Die = false;//죽었는지 안죽었는지
-  
+    bool Change = false;
 
   
 
@@ -78,9 +78,12 @@ public void Awake()
             }
             if (Input.GetKeyDown(KeyCode.Space))//스페이스바를 눌렀다면
             {
-                Instantiate(laser, this.transform.position, Quaternion.identity);
-                //레이저를 자기 자신의 위치에서 생성한다
+               
+                    Instantiate(laser, this.transform.position, Quaternion.identity);
+                }
+                
             }
-        }
-    }
-}
+                
+            }
+       }
+

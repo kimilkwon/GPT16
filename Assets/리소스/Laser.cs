@@ -4,11 +4,11 @@ using System.Collections;
 public class Laser : MonoBehaviour
 {
     float LaserSpeed = 12f;
- 
+    
     Enemy EM = null;
     BoxCollider2D bc = null;
     private ScoreCtrl SC = null;
-
+    public int Laser_Kind  ;
     void Awake()
     {
         bc = GetComponent<BoxCollider2D>();//BoxCollider2D를 넣어줌
@@ -35,9 +35,25 @@ public class Laser : MonoBehaviour
 
 
     }
+    public void Laser_Change()
+    {
+        Laser_Kind = 1;
+    }
     void Start()
     {
         Destroy(this.gameObject, 2f);
+        if(Laser_Kind == 1 )
+        {
+            SpriteRenderer sprite = GetComponentInChildren<SpriteRenderer>();
+
+            sprite.color = Color.red;
+        }
+        if (Laser_Kind == 0)
+        {
+            SpriteRenderer sprite = GetComponentInChildren<SpriteRenderer>();
+
+            sprite.color = Color.white;
+        }
     }
 
     // Update is called once per frame
